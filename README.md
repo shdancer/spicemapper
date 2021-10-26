@@ -11,7 +11,7 @@ npm install spicemapper
 
 之后在你的文件里面引入`spicemapper`，其中`Circuit`是电路类，`Components`包含常用的电路元件，`Types`包含电路元件的类型和单位。
 ```js
-import { Circuit, Resistor, VoltageSource, UnitType } from '../index';
+import { Circuit, Resistor, VoltageSource, UnitType } from 'spicemapper';
 ```
 使用`SpiceMapper`的一步要创建一个电路对象：
 ```js

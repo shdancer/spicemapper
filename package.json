@@ -13,6 +13,9 @@
   },
   "author": "shdancer",
   "license": "ISC",
+  "keywords": [
+    "SPICE"
+  ],
   "devDependencies": {
     "typescript": "^4.4.4"
   }
