@@ -7,6 +7,10 @@
     "test": "tsc && node ./dist/test.js"
   },
   "type": "commonjs",
+  "repository": {
+    "type": "git",
+    "url": "git@github.com:shdancer/spicemapper.git"
+  },
   "author": "shdancer",
   "license": "ISC",
   "devDependencies": {
