@@ -1,6 +1,4 @@
-import { Circuit } from "./circuit";
-import { Resistor, VoltageSource } from "./components/components";
-import { UnitType } from "./types";
+import { Circuit, Resistor, VoltageSource, UnitType, componentBase } from '../index';
 
 const cir = new Circuit();
 

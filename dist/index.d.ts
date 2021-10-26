@@ -1,5 +1,4 @@
-import { Circuit } from "./src/circuit";
-import * as componentBase from "./src/components/componentBase";
-import * as Components from "./src/components/components";
-import * as Types from "./src/types";
-export { Circuit, componentBase, Components, Types };
+export { Circuit } from './src/circuit';
+export { Component as componentBase } from './src/components/componentBase';
+export * from './src/components/components';
+export { ComponentType, UnitType } from './src/types';
