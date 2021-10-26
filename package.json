@@ -1,6 +1,6 @@
 {
   "name": "spicemapper",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "description": "a mapper can build SPICE Netlist",
   "main": "./dist/index.js",
   "scripts": {
