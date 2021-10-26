@@ -1,0 +1,15 @@
+{
+  "name": "spicemapper",
+  "version": "1.0.0",
+  "description": "a mapper can build SPICE Netlist",
+  "main": "./dist/index.js",
+  "scripts": {
+    "test": "tsc && node ./dist/test.js"
+  },
+  "type": "commonjs",
+  "author": "shdancer",
+  "license": "ISC",
+  "devDependencies": {
+    "typescript": "^4.4.4"
+  }
+}
