@@ -91,7 +91,7 @@ class Circuit {
         }
         return res;
     }
-    convertFomula(node = this.nodes[0], fomulas) {
+    convertFormula(node = this.nodes[0], formulas) {
         if (this.visited.has(node.getId))
             return;
         this.visited.add(node.getId);
@@ -99,65 +99,65 @@ class Circuit {
             switch (node.type) {
                 case types_1.ComponentType.CurrentSource:
                 case types_1.ComponentType.VoltageSource:
-                    fomulas[node.ports.get(0).fullName].right.push({
+                    formulas[node.ports.get(0).fullName].right.push({
                         positive: false,
                         term: `I_{${node.fullName}}`
                     });
-                    fomulas[node.ports.get(1).fullName].right.push({
+                    formulas[node.ports.get(1).fullName].right.push({
                         positive: true,
                         term: `I_{${node.fullName}}`
                     });
                     break;
                 case types_1.ComponentType.Resistor:
-                    fomulas[node.ports.get(0).fullName].left.push({
+                    formulas[node.ports.get(0).fullName].left.push({
                         positive: true,
                         term: `\\frac{1}{${node.fullName}}U_{n${node.ports.get(0).fullName}}`
                     });
-                    fomulas[node.ports.get(1).fullName].left.push({
+                    formulas[node.ports.get(1).fullName].left.push({
                         positive: true,
                         term: `\\frac{1}{${node.fullName}}U_{n${node.ports.get(1).fullName}}`
                     });
-                    fomulas[node.ports.get(0).fullName].left.push({
+                    formulas[node.ports.get(0).fullName].left.push({
                         positive: false,
                         term: `\\frac{1}{${node.fullName}}U_{n${node.ports.get(1).fullName}}`
                     });
-                    fomulas[node.ports.get(1).fullName].left.push({
+                    formulas[node.ports.get(1).fullName].left.push({
                         positive: false,
                         term: `\\frac{1}{${node.fullName}}U_{n${node.ports.get(0).fullName}}`
                     });
                     break;
                 case types_1.ComponentType.Capacitor:
-                    fomulas[node.ports.get(0).fullName].left.push({
+                    formulas[node.ports.get(0).fullName].left.push({
                         positive: true,
                         term: `${node.fullName}\\frac{dU_{n${node.ports.get(0).fullName}}}{dt}`
                     });
-                    fomulas[node.ports.get(1).fullName].left.push({
+                    formulas[node.ports.get(1).fullName].left.push({
                         positive: true,
                         term: `${node.fullName}\\frac{dU_{n${node.ports.get(1).fullName}}}{dt}`
                     });
-                    fomulas[node.ports.get(0).fullName].left.push({
+                    formulas[node.ports.get(0).fullName].left.push({
                         positive: false,
                         term: `${node.fullName}\\frac{dU_{n${node.ports.get(1).fullName}}}{dt}`
                     });
-                    fomulas[node.ports.get(1).fullName].left.push({
+                    formulas[node.ports.get(1).fullName].left.push({
                         positive: false,
                         term: `${node.fullName}\\frac{dU_{n${node.ports.get(0).fullName}}}{dt}`
                     });
                     break;
                 case types_1.ComponentType.Inductor:
-                    fomulas[node.ports.get(0).fullName].left.push({
+                    formulas[node.ports.get(0).fullName].left.push({
                         positive: true,
                         term: `\\${node.fullName}int_{t_0}^{t}U_{n${node.ports.get(0).fullName}}dt`
                     });
-                    fomulas[node.ports.get(1).fullName].left.push({
+                    formulas[node.ports.get(1).fullName].left.push({
                         positive: true,
                         term: `\\${node.fullName}int_{t_0}^{t}U_{n${node.ports.get(1).fullName}}dt`
                     });
-                    fomulas[node.ports.get(0).fullName].left.push({
+                    formulas[node.ports.get(0).fullName].left.push({
                         positive: false,
                         term: `\\${node.fullName}int_{t_0}^{t}U_{n${node.ports.get(1).fullName}}dt`
                     });
-                    fomulas[node.ports.get(1).fullName].left.push({
+                    formulas[node.ports.get(1).fullName].left.push({
                         positive: false,
                         term: `\\${node.fullName}int_{t_0}^{t}U_{n${node.ports.get(0).fullName}}dt`
                     });
@@ -165,7 +165,7 @@ class Circuit {
             }
         }
         for (const [_, nextNode] of node.ports) {
-            this.convertFomula(nextNode, fomulas);
+            this.convertFormula(nextNode, formulas);
         }
     }
     generate() {
@@ -176,21 +176,21 @@ class Circuit {
     generateFormula() {
         this.recount();
         this.visited.clear();
-        const fomulas = new Array();
-        while (fomulas.length !== this.nodeCount) {
-            fomulas.push({
+        const formulas = new Array();
+        while (formulas.length !== this.nodeCount) {
+            formulas.push({
                 left: new Array(),
                 right: new Array()
             });
         }
-        this.convertFomula(this.nodes[0], fomulas);
+        this.convertFormula(this.nodes[0], formulas);
         let res = '';
-        for (const index in fomulas) {
+        for (const index in formulas) {
             if (index === '0') {
                 continue;
             }
-            const fomula = fomulas[index];
-            const { left, right } = fomula;
+            const formula = formulas[index];
+            const { left, right } = formula;
             let tempRes = '';
             for (const index in left) {
                 if (left[index].term.includes('U_{n0}'))
