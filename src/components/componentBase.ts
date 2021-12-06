@@ -5,7 +5,8 @@ export class Component {
   public type: ComponentType;
   public name: string | number;
   public value: number;
-  public unit: UnitType
+  public unit: UnitType;
+  public extra: string;
   private id: number;
   private static idCounter: number = 0;;
 
@@ -34,6 +35,6 @@ export class Component {
   }
 
   toString(port: [number, number]): string {
-    return `${this.type}${this.name} ${port[0]} ${port[1]} ${this.fullValue}`
+    return `${this.type}${this.name} ${port[0]} ${port[1]} ${this.fullValue} ${this.extra}`
   }
 }

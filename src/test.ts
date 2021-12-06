@@ -1,4 +1,4 @@
-import { Circuit, Resistor, VoltageSource, UnitType, componentBase } from '../index';
+import { Circuit, Resistor, VoltageSource, UnitType } from '../index';
 
 const cir = new Circuit();
 
@@ -13,4 +13,4 @@ cir.connect('R2', 1, 'R1', 1);
 cir.connect('R2', 0, 'R1', 0);
 
 
-console.log(cir.generate());
+console.log(cir.generateFormula());

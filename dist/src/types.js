@@ -4,7 +4,7 @@ exports.UnitType = exports.ComponentType = void 0;
 var ComponentType;
 (function (ComponentType) {
     ComponentType["Resistor"] = "R";
-    ComponentType["Capacor"] = "C";
+    ComponentType["Capacitor"] = "C";
     ComponentType["Inductor"] = "L";
     ComponentType["CurrentSource"] = "I";
     ComponentType["VoltageSource"] = "V";

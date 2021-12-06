@@ -36,13 +36,51 @@ export class Resistor extends Component {
 }
 
 export class VoltageSource extends Component {
-  public constructor(name: string | number, value: number, unit: UnitType) {
+  public constructor(name: string | number, value: number, unit: UnitType, acValue?: number) {
     super({
       name: name,
       value: value,
       type: ComponentType.VoltageSource,
       unit: unit,
       maxDegree: 2,
-    })
+      extra: `AC ${acValue}`
+    });
+  }
+}
+
+export class CurrentSource extends Component {
+  public constructor(name: string | number, value: number, unit: UnitType, acValue?: number) {
+    super({
+      name: name,
+      value: value,
+      type: ComponentType.CurrentSource,
+      unit: unit,
+      maxDegree: 2,
+      extra: `AC ${acValue}`
+    });
+  }
+}
+
+export class Capacitor extends Component {
+  public constructor(name: string | number, value: number, unit: UnitType) {
+    super({
+      name: name,
+      value: value,
+      type: ComponentType.Capacitor,
+      unit: unit,
+      maxDegree: 2
+    });
+  }
+}
+
+export class Inductor extends Component {
+  public constructor(name: string | number, value: number, unit: UnitType) {
+    super({
+      name: name,
+      value: value,
+      type: ComponentType.Inductor,
+      unit: unit,
+      maxDegree: 2
+    });
   }
 }

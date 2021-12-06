@@ -1,7 +1,7 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.Circuit = void 0;
-const detailedComponent_1 = require("./components/detailedComponent");
+const components_1 = require("./components/components");
 const types_1 = require("./types");
 class Circuit {
     constructor() {
@@ -9,7 +9,7 @@ class Circuit {
         this.components = new Map();
         this.visited = new Set();
         this.nodes = new Array();
-        this.ground = new detailedComponent_1.Ground();
+        this.ground = new components_1.Ground();
         this.nodes.push(this.ground);
     }
     add(comp) {
@@ -29,13 +29,13 @@ class Circuit {
     connect(compAName, compAIndex, compBName, compBIndex) {
         const compA = this.components.get(compAName), compB = this.components.get(compBName);
         if (!compA.ports.get(compAIndex)) {
-            const node = new detailedComponent_1.CircuitNode(this.nodeCount++);
+            const node = new components_1.CircuitNode(this.nodeCount++);
             this.nodes.push(node);
             compA.ports.set(compAIndex, node);
             node.ports.set(compA.fullName, compA);
         }
         if (!compB.ports.get(compBIndex)) {
-            const node = new detailedComponent_1.CircuitNode(this.nodeCount++);
+            const node = new components_1.CircuitNode(this.nodeCount++);
             this.nodes.push(node);
             compB.ports.set(compBIndex, node);
             node.ports.set(compB.fullName, compB);

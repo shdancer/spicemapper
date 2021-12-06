@@ -10,5 +10,5 @@ cir.connectGround('V1', 1);
 cir.connect('R1', 1, 'V1', 0);
 cir.connect('R2', 1, 'R1', 1);
 cir.connect('R2', 0, 'R1', 0);
-console.log(cir.generateFormula());
+console.log(cir.generate());
 //# sourceMappingURL=test.js.map

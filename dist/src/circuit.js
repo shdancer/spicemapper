@@ -91,10 +91,127 @@ class Circuit {
         }
         return res;
     }
+    convertFomula(node = this.nodes[0], fomulas) {
+        if (this.visited.has(node.getId))
+            return;
+        this.visited.add(node.getId);
+        if (node.type !== types_1.ComponentType.Node) {
+            switch (node.type) {
+                case types_1.ComponentType.CurrentSource:
+                case types_1.ComponentType.VoltageSource:
+                    fomulas[node.ports.get(0).fullName].right.push({
+                        positive: false,
+                        term: `I_{${node.fullName}}`
+                    });
+                    fomulas[node.ports.get(1).fullName].right.push({
+                        positive: true,
+                        term: `I_{${node.fullName}}`
+                    });
+                    break;
+                case types_1.ComponentType.Resistor:
+                    fomulas[node.ports.get(0).fullName].left.push({
+                        positive: true,
+                        term: `\\frac{1}{${node.fullName}}U_{n${node.ports.get(0).fullName}}`
+                    });
+                    fomulas[node.ports.get(1).fullName].left.push({
+                        positive: true,
+                        term: `\\frac{1}{${node.fullName}}U_{n${node.ports.get(1).fullName}}`
+                    });
+                    fomulas[node.ports.get(0).fullName].left.push({
+                        positive: false,
+                        term: `\\frac{1}{${node.fullName}}U_{n${node.ports.get(1).fullName}}`
+                    });
+                    fomulas[node.ports.get(1).fullName].left.push({
+                        positive: false,
+                        term: `\\frac{1}{${node.fullName}}U_{n${node.ports.get(0).fullName}}`
+                    });
+                    break;
+                case types_1.ComponentType.Capacitor:
+                    fomulas[node.ports.get(0).fullName].left.push({
+                        positive: true,
+                        term: `${node.fullName}\\frac{dU_{n${node.ports.get(0).fullName}}}{dt}`
+                    });
+                    fomulas[node.ports.get(1).fullName].left.push({
+                        positive: true,
+                        term: `${node.fullName}\\frac{dU_{n${node.ports.get(1).fullName}}}{dt}`
+                    });
+                    fomulas[node.ports.get(0).fullName].left.push({
+                        positive: false,
+                        term: `${node.fullName}\\frac{dU_{n${node.ports.get(1).fullName}}}{dt}`
+                    });
+                    fomulas[node.ports.get(1).fullName].left.push({
+                        positive: false,
+                        term: `${node.fullName}\\frac{dU_{n${node.ports.get(0).fullName}}}{dt}`
+                    });
+                    break;
+                case types_1.ComponentType.Inductor:
+                    fomulas[node.ports.get(0).fullName].left.push({
+                        positive: true,
+                        term: `\\${node.fullName}int_{t_0}^{t}U_{n${node.ports.get(0).fullName}}dt`
+                    });
+                    fomulas[node.ports.get(1).fullName].left.push({
+                        positive: true,
+                        term: `\\${node.fullName}int_{t_0}^{t}U_{n${node.ports.get(1).fullName}}dt`
+                    });
+                    fomulas[node.ports.get(0).fullName].left.push({
+                        positive: false,
+                        term: `\\${node.fullName}int_{t_0}^{t}U_{n${node.ports.get(1).fullName}}dt`
+                    });
+                    fomulas[node.ports.get(1).fullName].left.push({
+                        positive: false,
+                        term: `\\${node.fullName}int_{t_0}^{t}U_{n${node.ports.get(0).fullName}}dt`
+                    });
+                    break;
+            }
+        }
+        for (const [_, nextNode] of node.ports) {
+            this.convertFomula(nextNode, fomulas);
+        }
+    }
     generate() {
         this.recount();
         this.visited.clear();
         return this.convert();
+    }
+    generateFormula() {
+        this.recount();
+        this.visited.clear();
+        const fomulas = new Array();
+        while (fomulas.length !== this.nodeCount) {
+            fomulas.push({
+                left: new Array(),
+                right: new Array()
+            });
+        }
+        this.convertFomula(this.nodes[0], fomulas);
+        let res = '';
+        for (const index in fomulas) {
+            if (index === '0') {
+                continue;
+            }
+            const fomula = fomulas[index];
+            const { left, right } = fomula;
+            let tempRes = '';
+            for (const index in left) {
+                if (left[index].term.includes('U_{n0}'))
+                    continue;
+                if (index === '0') {
+                    tempRes += `${left[index].positive ? '' : '-'}${left[index].term}`;
+                    continue;
+                }
+                tempRes += `${left[index].positive ? '+' : '-'}${left[index].term}`;
+            }
+            tempRes += '=';
+            for (const index in right) {
+                if (index === '0') {
+                    tempRes += `${right[index].positive ? '' : '-'}${right[index].term}`;
+                    continue;
+                }
+                tempRes += `${right[index].positive ? '+' : '-'}${right[index].term}`;
+            }
+            res += (tempRes + '\\\\ \n');
+        }
+        return res;
     }
 }
 exports.Circuit = Circuit;

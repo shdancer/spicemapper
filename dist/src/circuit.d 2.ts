@@ -1,4 +1,4 @@
-import { Component } from './components/component';
+import { Component } from './components/componentBase';
 export declare class Circuit {
     private components;
     private visited;

@@ -1,6 +1,6 @@
 declare enum ComponentType {
     Resistor = "R",
-    Capacor = "C",
+    Capacitor = "C",
     Inductor = "L",
     CurrentSource = "I",
     VoltageSource = "V",
@@ -18,6 +18,7 @@ interface IComponent {
     name: string | number;
     value: number;
     unit: UnitType;
+    extra?: string;
     maxDegree: number;
 }
 export { ComponentType, UnitType, IComponent };

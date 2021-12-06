@@ -26,4 +26,4 @@ class Component {
 }
 exports.Component = Component;
 Component.idCounter = 0;
-//# sourceMappingURL=component.js.map
+//# sourceMappingURL=componentBase.js.map

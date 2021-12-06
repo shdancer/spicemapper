@@ -2,8 +2,8 @@
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.VoltageSource = exports.Resistor = exports.Ground = exports.CircuitNode = void 0;
 const types_1 = require("../types");
-const component_1 = require("./component");
-class CircuitNode extends component_1.Component {
+const componentBase_1 = require("./componentBase");
+class CircuitNode extends componentBase_1.Component {
     constructor(name) {
         super({
             type: types_1.ComponentType.Node,
@@ -24,7 +24,7 @@ class Ground extends CircuitNode {
     }
 }
 exports.Ground = Ground;
-class Resistor extends component_1.Component {
+class Resistor extends componentBase_1.Component {
     constructor(name, value, unit) {
         super({
             name: name,
@@ -36,7 +36,7 @@ class Resistor extends component_1.Component {
     }
 }
 exports.Resistor = Resistor;
-class VoltageSource extends component_1.Component {
+class VoltageSource extends componentBase_1.Component {
     constructor(name, value, unit) {
         super({
             name: name,
@@ -48,4 +48,4 @@ class VoltageSource extends component_1.Component {
     }
 }
 exports.VoltageSource = VoltageSource;
-//# sourceMappingURL=detailedComponent.js.map
+//# sourceMappingURL=components.js.map

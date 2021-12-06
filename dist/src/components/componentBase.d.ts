@@ -5,6 +5,7 @@ export declare class Component {
     name: string | number;
     value: number;
     unit: UnitType;
+    extra: string;
     private id;
     private static idCounter;
     ports: Map<string | number, Component>;

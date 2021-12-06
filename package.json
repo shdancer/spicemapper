@@ -4,9 +4,8 @@
   "description": "a mapper can build SPICE Netlist",
   "main": "./dist/index.js",
   "scripts": {
-    "test": "tsc && node ./dist/test.js"
+    "test": "tsc && node ./dist/src/test.js"
   },
-  "type": "commonjs",
   "repository": {
     "type": "git",
     "url": "git@github.com:shdancer/spicemapper.git"
@@ -17,6 +16,6 @@
     "SPICE"
   ],
   "devDependencies": {
-    "typescript": "^4.4.4"
+    "typescript": "^4.5.2"
   }
 }

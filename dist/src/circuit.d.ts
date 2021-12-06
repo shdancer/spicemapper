@@ -14,5 +14,7 @@ export declare class Circuit {
     private rename;
     recount(): void;
     private convert;
+    private convertFomula;
     generate(): string;
+    generateFormula(): string;
 }

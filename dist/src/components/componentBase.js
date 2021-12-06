@@ -21,7 +21,7 @@ class Component {
         return String(this.id);
     }
     toString(port) {
-        return `${this.type}${this.name} ${port[0]} ${port[1]} ${this.fullValue}`;
+        return `${this.type}${this.name} ${port[0]} ${port[1]} ${this.fullValue} ${this.extra}`;
     }
 }
 exports.Component = Component;

@@ -1,5 +1,5 @@
 import { UnitType } from '../types';
-import { Component } from './component';
+import { Component } from './componentBase';
 export declare class CircuitNode extends Component {
     constructor(name: string | number);
     get fullName(): string;
