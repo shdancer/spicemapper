@@ -209,6 +209,9 @@ class Circuit {
                 }
                 tempRes += `${right[index].positive ? '+' : '-'}${right[index].term}`;
             }
+            if (right.length === 0) {
+                tempRes += 0;
+            }
             res += (tempRes + '\\\\ \n');
         }
         return res;
