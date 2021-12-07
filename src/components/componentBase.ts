@@ -35,6 +35,6 @@ export class Component {
   }
 
   toString(port: [number, number]): string {
-    return `${this.type}${this.name} ${port[0]} ${port[1]} ${this.fullValue} ${this.extra}`
+    return `${this.type}${this.name} ${port[0]} ${port[1]} ${this.fullValue} ${this.extra || ''}`
   }
 }

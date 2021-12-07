@@ -18,4 +18,5 @@ cir.connect('R4', 0, 'V1', 0);
 cir.connect('C1', 0, 'R1', 0);
 cir.connect('C1', 1, 'R4', 1);
 console.log(cir.generateFormula());
+console.log(cir.generate());
 //# sourceMappingURL=test.js.map

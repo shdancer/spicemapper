@@ -21,3 +21,4 @@ cir.connect('C1', 1, 'R4', 1);
 
 
 console.log(cir.generateFormula());
+console.log(cir.generate());
